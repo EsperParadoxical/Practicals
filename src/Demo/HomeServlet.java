@@ -11,7 +11,7 @@ import java.io.*;
 /**
  * Created by 151260D on 10/31/2016.
  */
-@WebServlet(name = "HomeServlet")
+@WebServlet(name = "HomeServlet", urlPatterns = "/bookstore")
 public class HomeServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -28,13 +28,27 @@ public class HomeServlet extends HttpServlet {
 
 
     private String getContent() {
-        BookDBAO bookdb = new BookDBAO();
-        BookDetails book = new BookDetails();
-
+        BookDBAO db = new BookDBAO();
+        BookDetails bd = db.getBookDetails("203");
         StringBuilder buffer = new StringBuilder();
-        buffer.append("<html>"+"<head><title>Duke's Bookstore</title></head>");
-        buffer.append("<body> + ")
+        buffer.append("<html>" + "<head><title>Duke's Bookstore</title></head>");
+        buffer.append("<body  bgcolor=\"#ffffff\">" + "<center>" +
+                "<hr> <br> &nbsp;" + "<h1>" +
+                "<font size=\"+3\" color=\"#CC0066\">Duke's </font> <img src=\"" +
+                "./duke.books.gif\" alt=\"Duke holding books\"\">" +
+                "<font size=\"+3\" color=\"black\">Bookstore</font>" + "</h1>" +
+                "</center>" + "<br> &nbsp; <hr> <br> ");
 
-        return “”;
+        buffer.append("<b>What we are reading</b>" + "<p>" +
+                "<blockquote><em><a href=\"" +
+                "bookdetails?bookId=203" + "\">" + bd.getTitle() +
+                "</a></em>" + bd.getDescription() + "</blockquote>");
+
+        buffer.append("<p><a href=\"" +
+                "bookcatalog" +
+                "\"><b>Start Shopping</b></a></font><br>" +
+                "<br> &nbsp;<br> &nbsp;<br> &nbsp;</body></html>");
+
+        return buffer.toString();
     }
 }
