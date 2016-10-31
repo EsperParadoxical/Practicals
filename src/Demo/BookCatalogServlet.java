@@ -22,7 +22,12 @@ public class BookCatalogServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         PrintWriter out = response.getWriter();
 
-        BookDBAO db = new BookDBAO();
+        BookDBAO db = null;
+        try {
+            db = new BookDBAO();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         List<BookDetails> list = db.getAllBook();
         out.println("<html>" + "<head><title>Duke's Bookstore</title></head>" +
                 "<body  bgcolor=\"#ffffff\">" + "<center>" +

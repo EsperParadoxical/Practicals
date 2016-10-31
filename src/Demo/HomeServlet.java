@@ -28,7 +28,12 @@ public class HomeServlet extends HttpServlet {
 
 
     private String getContent() {
-        BookDBAO db = new BookDBAO();
+        BookDBAO db = null;
+        try {
+            db = new BookDBAO();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         BookDetails bd = db.getBookDetails("203");
         StringBuilder buffer = new StringBuilder();
         buffer.append("<html>" + "<head><title>Duke's Bookstore</title></head>");
