@@ -1,5 +1,8 @@
 package Demo;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by 151260D on 10/31/2016.
  */
@@ -33,5 +36,17 @@ public class BookDBAO {
     public BookDetails getBookDetails(String bookId) {
         // return dummy book for testing now
         return createDummyBook(bookId);
+    }
+
+    public List<BookDetails> getAllBook() {
+        ArrayList<BookDetails> list = new ArrayList<BookDetails>();
+        for (int i=1; i<=5; i++) {
+            BookDetails book = createDummyBook("100" + i);
+            book.setTitle("Web components for developers Edition " + i);
+            book.setInventory(i);
+            book.setPrice(2+i);
+            list.add(book);
+        }
+        return list;
     }
 }
